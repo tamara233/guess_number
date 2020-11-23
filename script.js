@@ -1,10 +1,10 @@
 'use strict';
 
 let randomNum = Math.trunc((Math.random() * 20) + 1)
-console.log(randomNum);
 const message = document.querySelector('.message');
 const body = document.querySelector('body')
 let score = 20;
+let highscore = 0;
 
 document.querySelector('.check').addEventListener('click', function () {
     const guessNum = Number(document.querySelector('.guess').value)
@@ -18,6 +18,8 @@ document.querySelector('.check').addEventListener('click', function () {
             document.querySelector('.number').textContent = guessNum;
             document.querySelector('.number').style.width = '30rem';
             body.style.backgroundColor = '#60b347';
+            score > highscore ? highscore = score : null;
+            document.querySelector('.highscore').textContent = highscore;
         } else {
             guessNum > randomNum ? message.textContent = '📈 Too high!' : message.textContent = '📉 Too low!';
             score--;
@@ -32,6 +34,7 @@ document.querySelector('.check').addEventListener('click', function () {
 document.querySelector('.again').addEventListener('click', function () {
     message.textContent = 'Start guessing...';
     body.style.backgroundColor = '#222';
+    score = 20;
     document.querySelector('.score').textContent = '20';
     document.querySelector('.number').style.width = '15rem';
     document.querySelector('.number').textContent = '?'
